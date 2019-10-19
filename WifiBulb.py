@@ -10,14 +10,14 @@ class Bulb:
     This class controls the mystrom bulb.
     """
 
-    def __init__(self, ip_address, mac_address):
+    def __init__(self):
         """
         This function initializes the bulb class.
         :param ip_address:
         :param mac_address:
         """
-        self.__ip_address = ip_address
-        self.__mac_address = mac_address
+        self.__ip_address = "192.168.0.185"
+        self.__mac_address = "5CCF7FA0BB48"
 
     def get_device_specifications(self, print_out=False):
         """
@@ -33,6 +33,7 @@ class Bulb:
                 print(key + " : " + str(device_specifications_dict[key]))
         return device_specifications_dict
 
+
     def turn_light_on(self):
         """
         This function turns the light on.
@@ -45,7 +46,7 @@ class Bulb:
         else:
             command = 'curl --location --request POST "http://' + self.__ip_address + '/api/v1/device/' + self.__mac_address + '"' + ' --data  "action=on"'
             os.system(command)
-            time.sleep(2)
+            #time.sleep(2)
 
     def turn_light_off(self):
         """
@@ -59,7 +60,7 @@ class Bulb:
         else:
             command = 'curl --location --request POST "http://' + self.__ip_address + '/api/v1/device/' + self.__mac_address + '"' + ' --data  "action=off"'
             os.system(command)
-            time.sleep(2)
+            #time.sleep(2)
 
     def set_light_mode(self, mode):
         """
@@ -85,16 +86,19 @@ class Bulb:
         time.sleep(transition_time/1000)
 
 
-bulb_ip = "192.168.8.114"
-bulb_mac = "5CCF7FA0BB48"
-
-bulb = Bulb(bulb_ip, bulb_mac)
-bulb.set_light_mode("hsv")
+# bulb_ip = "192.168.8.114"
+# bulb_mac = "5CCF7FA0BB48"
+#
+# bulb = Bulb(bulb_ip, bulb_mac)
+# bulb.set_light_mode("hsv")
+# # bulb.get_device_specifications(print_out=True)
+# # hsv_value = [3, 50, 50]
+# # bulb.set_color_hsv(hsv_value, 300)
+# bulb.turn_light_on()
 # bulb.get_device_specifications(print_out=True)
-# hsv_value = [3, 50, 50]
-# bulb.set_color_hsv(hsv_value, 300)
-bulb.get_device_specifications(print_out=True)
-bulb.turn_light_off()
+# spec = bulb.get_device_specifications(print_out=True)
+# print(spec['on'])
+
 
 
 
