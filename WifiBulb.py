@@ -10,14 +10,14 @@ class Bulb:
     This class controls the mystrom bulb.
     """
 
-    def __init__(self):
+    def __init__(self, ip_address, mac_address):
         """
         This function initializes the bulb class.
         :param ip_address:
         :param mac_address:
         """
-        self.__ip_address = "192.168.0.185"
-        self.__mac_address = "5CCF7FA0BB48"
+        self.__ip_address = ip_address
+        self.__mac_address = mac_address
 
     def get_device_specifications(self, print_out=False):
         """
@@ -86,10 +86,11 @@ class Bulb:
         time.sleep(transition_time/1000)
 
 
-# bulb_ip = "192.168.8.114"
-# bulb_mac = "5CCF7FA0BB48"
+bulb_ip = "192.168.8.115"
+bulb_mac = "68C63AD021B2"
 #
-# bulb = Bulb(bulb_ip, bulb_mac)
+bulb = Bulb(bulb_ip, bulb_mac)
+
 # bulb.set_light_mode("hsv")
 # # bulb.get_device_specifications(print_out=True)
 # # hsv_value = [3, 50, 50]
