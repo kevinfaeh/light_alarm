@@ -79,38 +79,70 @@ class Bulb:
         :param transition_time: time from current state to next state in ms.
         :type transition_time float
         """
+        self.set_light_mode("hsv")
         color = str(hsv[0]) + ";" + str(hsv[1]) + ";" + str(hsv[2])
         ramp = str(transition_time)
         command = 'curl --location --request POST "http://' + self.__ip_address + '/api/v1/device/' + self.__mac_address + '"' + ' --data  "color=' + color + '&ramp=' + ramp + '"'
         os.system(command)
         time.sleep(transition_time/1000)
 
-    def hex_to_rgb(self, hex):
+    def rgb_to_hsv(self, rgb):
+        """
+        This function converts rgb to hsv values
+        :param rgb: list of rgb values
+        :return: hsv list of hsv values
+        """
+        r = rgb[0]
+        g = rgb[1]
+        b = rgb[2]
+        h = 0
+        s = 0
+        v = 0
+
+        r, g, b = r / 255.0, g / 255.0, b / 255.0
+        mx = max(r, g, b)
+        mn = min(r, g, b)
+        df = mx - mn
+        if mx == mn:
+            h = 0
+        elif mx == r:
+            h = (60 * ((g - b) / df) + 360) % 360
+        elif mx == g:
+            h = (60 * ((b - r) / df) + 120) % 360
+        elif mx == b:
+            h = (60 * ((r - g) / df) + 240) % 360
+        if mx == 0:
+            s = 0
+        else:
+            s = df / mx
+        v = mx
+        hsv = [h, s*100, v*100]
+        return hsv
+
+    def hex_to_rgb(self, hexcolor):
         """
         This function converts the hexadecimal color to an rgb color.
-        :param hex: hexadecimal color
-        :type hex: stringS
+        :param hexcolor: hexadecimal color
+        :type hexcolor: stringS
         :return: rgb values
         :rtype: list
         """
-        color = str(hex)
+        color = str(hexcolor)
         color_rgb = [int(color[i:i+2], 16) for i in (0, 2, 4)]
         return color_rgb
 
-    def set_color_hex(self, hex, transition_time=400):
+    def set_color_hex(self, hexcolor, transition_time=400):
         """
         This function sets the color of the bulb with hsv: hue: [0, 360], saturation [0, 100], value [0, 100]
-        :param hex: string as hexadecimal numbers
-        :type hex: string
+        :param hexcolor: string as hexadecimal numbers
+        :type hexcolor: string
         :param transition_time: time from current state to next state in ms.
         :type transition_time float
         """
-        color_rgb = self.hex_to_rgb(hex)
-        color = str(color_rgb[0]) + ";" + str(color_rgb[1]) + ";" + str(color_rgb[2])
-        ramp = str(transition_time)
-        command = 'curl --location --request POST "http://' + self.__ip_address + '/api/v1/device/' + self.__mac_address + '"' + ' --data  "color=' + color + '&ramp=' + ramp + '"'
-        os.system(command)
-        time.sleep(transition_time/1000)
+        color_rgb = self.hex_to_rgb(hexcolor)
+        color_hsv = self.rgb_to_hsv(color_rgb)
+        print(color_hsv)
+        self.set_color_hsv(color_hsv)
 
 
 bulb_ip = "192.168.8.115"
