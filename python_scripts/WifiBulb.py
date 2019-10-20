@@ -79,7 +79,6 @@ class Bulb:
         :param transition_time: time from current state to next state in ms.
         :type transition_time float
         """
-        self.set_light_mode("hsv")
         color = str(hsv[0]) + ";" + str(hsv[1]) + ";" + str(hsv[2])
         ramp = str(transition_time)
         command = 'curl --location --request POST "http://' + self.__ip_address + '/api/v1/device/' + self.__mac_address + '"' + ' --data  "color=' + color + '&ramp=' + ramp + '"'
@@ -106,17 +105,17 @@ class Bulb:
         if mx == mn:
             h = 0
         elif mx == r:
-            h = (60 * ((g - b) / df) + 360) % 360
+            h = int((60 * ((g - b) / df) + 360) % 360)
         elif mx == g:
-            h = (60 * ((b - r) / df) + 120) % 360
+            h = int((60 * ((b - r) / df) + 120) % 360)
         elif mx == b:
-            h = (60 * ((r - g) / df) + 240) % 360
+            h = int((60 * ((r - g) / df) + 240) % 360)
         if mx == 0:
             s = 0
         else:
-            s = df / mx
-        v = mx
-        hsv = [h, s*100, v*100]
+            s = int(100 * df / mx)
+        v = int(mx*100)
+        hsv = [h, s, v]
         return hsv
 
     def hex_to_rgb(self, hexcolor):
@@ -149,6 +148,7 @@ bulb_ip = "192.168.8.115"
 bulb_mac = "68C63AD021B2"
 #
 bulb = Bulb(bulb_ip, bulb_mac)
+bulb.set_color_hex('FF33AE')
 
 # bulb.set_light_mode("hsv")
 # # bulb.get_device_specifications(print_out=True)
