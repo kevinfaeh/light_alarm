@@ -43,7 +43,6 @@
           }
       }
       $light_status = exec("python3 python_scripts/get_light_status.py");
-      echo $light_status;
       if($light_status == 'False'){
         echo "<p>The light is OFF.";
         echo "<p><form action='index.php' method='POST'>
@@ -69,11 +68,18 @@
     </div>
 
      <?php
+          if(isset($_POST['selected_color'])){
           $color_selected = $_POST["selected_color"];
-          echo $color_selected;
-          echo "The value is" . $color_selected;
+          echo is_null($color_selected);
+          if($color_selected != NULL){
           exec("python3 python_scripts/set_color_hex.py $color_selected");
+        }
+        }
        ?>
+
+    <div>
+      <a href="index.php"> BACK TO MAIN PAGE </a>
+    </div>
 
 
 

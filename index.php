@@ -50,7 +50,7 @@
     <p> try the <em>voice module</em> </p>
     <p> set the time to wake up </p>
 
-    <form action="process.php" method="POST">
+    <form action="index.php" method="POST">
       <div class="my-form">
           <label> First Name </label>
           <input type="text" name = "first-name">
@@ -64,7 +64,8 @@
   </br>
   <div class="p-box">
   </div>
-  <p> Here you can change the color </p>
+  <div>
+    <a href="process.php" > Click here to change the COLOR </a>
   <script src="main.js"> </script>
 
   </div>
