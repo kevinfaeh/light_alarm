@@ -21,15 +21,15 @@
       if(isset($_POST['newstate'])){
         $new = $_POST['newstate'];
         if($new=='0'){
-          exec("python3 light_alarm/turn_light_off.py");
+          exec("python3 python_scripts/turn_light_off.py");
           sleep(3);
         }
         elseif ($new=='1') {
-          exec("python3 light_alarm/turn_light_on.py");
+          exec("python3 python_scripts/turn_light_on.py");
           sleep(3);
           }
       }
-      $light_status = exec("python3 light_alarm/get_light_status.py");
+      $light_status = exec("python3 python_scripts/get_light_status.py");
       echo $light_status;
       if($light_status == 'False'){
         echo "<p>The light is OFF.";
@@ -65,7 +65,7 @@
   <div class="p-box">
   </div>
   <p> Here you can change the color </p>
-  <script src="main.js" /> </script>
+  <script src="main.js"> </script>
 
   </div>
 
