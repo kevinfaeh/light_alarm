@@ -64,6 +64,8 @@
   </br>
   <div class="p-box">
   </div>
+  <p> Here you can change the color </p>
+  <script src="main.js" /> </script>
 
   </div>
 

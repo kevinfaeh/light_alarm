@@ -85,6 +85,33 @@ class Bulb:
         os.system(command)
         time.sleep(transition_time/1000)
 
+    def hex_to_rgb(self, hex):
+        """
+        This function converts the hexadecimal color to an rgb color.
+        :param hex: hexadecimal color
+        :type hex: stringS
+        :return: rgb values
+        :rtype: list
+        """
+        color = str(hex)
+        color_rgb = [int(color[i:i+2], 16) for i in (0, 2, 4)]
+        return color_rgb
+
+    def set_color_hex(self, hex, transition_time=400):
+        """
+        This function sets the color of the bulb with hsv: hue: [0, 360], saturation [0, 100], value [0, 100]
+        :param hex: string as hexadecimal numbers
+        :type hex: string
+        :param transition_time: time from current state to next state in ms.
+        :type transition_time float
+        """
+        color_rgb = self.hex_to_rgb(hex)
+        color = str(color_rgb[0]) + ";" + str(color_rgb[1]) + ";" + str(color_rgb[2])
+        ramp = str(transition_time)
+        command = 'curl --location --request POST "http://' + self.__ip_address + '/api/v1/device/' + self.__mac_address + '"' + ' --data  "color=' + color + '&ramp=' + ramp + '"'
+        os.system(command)
+        time.sleep(transition_time/1000)
+
 
 bulb_ip = "192.168.8.115"
 bulb_mac = "68C63AD021B2"
