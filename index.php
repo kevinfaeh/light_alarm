@@ -47,6 +47,60 @@
       }
 
     ?>
+    <?php
+    session_start();
+    $alarm_set = False;
+    if(isset($_POST['alarm_state'])){
+      $new_alarm_state = $_POST['alarm_state'];
+      if($new_alarm_state == '0'){
+        #$pid_alarm = $_SESSION["pid_alarm"];
+        #echo $pid_alarm;
+        exec("python3 python_scripts/unset_alarm2.py");
+        #echo $success;
+
+        $alarm_set = False;
+      }
+      elseif($new_alarm_state == '1'){
+        $start_time = $_POST['start_time'];
+        $alarm_duration = $_POST['alarm_duration'];
+        echo $start_time;
+        echo "<p></br>";
+        echo $alarm_duration;
+        echo "<p></br>";
+        exec("env/bin/python3 python_scripts/set_alarm2.py $start_time $alarm_duration");
+        #exec("python3 python_scripts/scratch.py");
+        #$_SESSION["pid_alarm"] = $pid_alarm;
+        #echo $pid_alarm;
+        $alarm_set = True;
+      }
+    }
+
+
+    if($alarm_set == False){
+      echo "<p>No alarm set";
+      echo "<p><form action='index.php' method='POST'>
+              <div class='my-form'>
+                <label> Alarm Time </label>
+                <input type='time' name = 'start_time' placeholder='06:00 AM'>
+              </div>
+              <div class='my-form'>
+                <label> Alarm Duration </label>
+                <input type='text' name = 'alarm_duration'>
+              </div>
+              <input type='hidden' name='alarm_state' value='1'>
+              <input class=button type='submit' value='SET ALARM'>
+              </form>";
+    }
+    else{
+      echo "<p>Alarm set at $start_time";
+      echo "<p><form action='index.php' method='POST'>
+              <input type='hidden' name='alarm_state' value='0'>
+              <input class=button type='submit' value='UNSET_ALARM'>
+              </form>";
+    }
+
+
+    ?>
     <p> try the <em>voice module</em> </p>
     <p> set the time to wake up </p>
 

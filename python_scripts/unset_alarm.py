@@ -6,4 +6,8 @@ import sys
 import os
 import signal
 
-os.kill(int(sys.argv[1]), signal.SIGTERM)
+try:
+    os.kill(-int(sys.argv[1]), signal.SIGTERM)
+    print(True)
+except ProcessLookupError:
+    print(False)
