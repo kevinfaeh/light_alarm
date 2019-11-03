@@ -7,3 +7,5 @@ To allow the that the commands executed by apache2 (www-data) can play music add
 
 
 sudo usermod -aG audio www-data
+
+hallo, ich bin helen

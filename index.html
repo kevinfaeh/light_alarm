@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title> Light Control </title>
+  <link rel="stylesheet" type="text/css"
+  href="css/style.css">
+</head> <!-- a comment -->
+
+<body>
+  <div class="container">
+    <h1> Es werde Licht! – Und es ward' Licht. </h1>
+    <h2> Uhrzeit: </h2>
+
+   <!-- <?php
+      echo date("j.n.Y H:i", time());
+     ?> -->
+    <div class="box1">
+      <p> Mach das Licht <strong>an <strong> oder <strong>aus.</strong> </p>
+    </div>
+
+<!-- <?php
+      if(isset($_POST['newstate'])){
+        $new = $_POST['newstate'];
+        if($new=='0'){
+          exec("python3 python_scripts/turn_light_off.py");
+          sleep(3);
+        }
+        elseif ($new=='1') {
+          exec("python3 python_scripts/turn_light_on.py");
+          sleep(3);
+          }
+      }
+      $light_status = exec("python3 python_scripts/get_light_status.py");
+      echo $light_status;
+      if($light_status == 'False'){
+        echo "<p> <br/> Das Licht ist AUS.";
+        echo "<p><form action='index.php' method='POST'>
+                <input type='hidden' name='newstate' value='1'>
+                <input class=button type='submit' value='LED ON'>
+                </form>";
+      }
+      else{
+        echo "<p>Das Licht ist AN.";
+        echo "<p><form action='index.php' method='POST'>
+                <input type='hidden' name='newstate' value='0'>
+                <input class=button type='submit' value='LED OFF'>
+                </form>";
+      }
+
+    ?> -->
+
+    <p> Probier das <em>voice module</em> aus. </p>
+    <p> Hier die Weckzeit einstellen: </p>
+
+    <form action="index.php" method="POST">
+      <div class="my-form">
+          <label> Dein Name: </label>
+          <input type="text" name = "first-name">
+      </div>
+      <div class="my-form">
+          <label>  Alarm </label>
+            <input type="time" name = "alarmtime" placeholder="06:30 AM">
+      </div>
+        <input class=button type="submit" name="set time" value="set time">
+    </form>
+ <!-- </br>
+  <div class="p-box">
+  </div> -->
+  <div>
+    <a class="hyper" href="process.html" > <br/> <br/> Klicke hier, um die FARBE zu ändern. </a> 
+<!-- <script src="main.js"> </script> -->
+
+  </div>
+
+</body>
+
+
+</html>
