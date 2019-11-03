@@ -1,12 +1,13 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-from WifiBulb import bulb
 import sys
 import time
 import datetime
-#from pygame import mixer
 import pygame
+
+from WifiBulb import bulb
+
 
 alarm_time = str(sys.argv[1])
 alarm_durance = int(sys.argv[2])
@@ -16,9 +17,10 @@ wakeup_colors = ["480000", "640000" "9C0003", "CA4106", "8D2204", "882F1B", "833
 
 with open("python_scripts/bulb_data.txt", 'w+') as data:
     data.write(alarm_time)
-    print("wrote data")
+    #print("wrote data")
     data.close()
     time.sleep(0.2)
+
 
 def check_if_break(alarm_time):
     """
@@ -27,7 +29,7 @@ def check_if_break(alarm_time):
     """
     with open("python_scripts/bulb_data.txt", 'r+') as data:
         read_alarm_time = data.read()
-        print(read_alarm_time)
+        #print(read_alarm_time)
         data.close()
         if read_alarm_time != alarm_time:
             return True
@@ -37,9 +39,19 @@ def check_if_break(alarm_time):
 
 while True:
     time_now = datetime.datetime.now()
+    if len(str(time_now.hour)) < 2:
+        hour = "0" + str(time_now.hour)
+    else:
+        hour = str(time_now.hour)
+    if len(str(time_now.minute)) < 2:
+        minute = "0" + str(time_now.minute)
+    else:
+        minute = str(time_now.minute)
+
     if check_if_break(alarm_time):
         break
-    if str(time_now.hour) == str(alarm_time[0:2]) and str(time_now.minute) == str(alarm_time[3:5]):
+
+    if hour == str(alarm_time[0:2]) and minute == str(alarm_time[3:5]):
         bulb.turn_light_on()
         for i in range(9):
             bulb.set_color_hex(wakeup_colors[i])
@@ -59,3 +71,8 @@ while True:
             time.sleep(4)
         break
     time.sleep(5)
+
+with open("python_scripts/bulb_data.txt", 'w+') as data:
+    data.write(alarm_time)
+    print("No Alarm Set")
+    data.close()

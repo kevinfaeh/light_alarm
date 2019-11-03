@@ -33,7 +33,6 @@ class Bulb:
                 print(key + " : " + str(device_specifications_dict[key]))
         return device_specifications_dict
 
-
     def turn_light_on(self):
         """
         This function turns the light on.
@@ -148,7 +147,7 @@ bulb_ip = "192.168.8.115"
 bulb_mac = "68C63AD021B2"
 #
 bulb = Bulb(bulb_ip, bulb_mac)
-bulb.set_color_hex('FF33AE')
+
 
 # bulb.set_light_mode("hsv")
 # # bulb.get_device_specifications(print_out=True)

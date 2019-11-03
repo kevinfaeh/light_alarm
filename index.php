@@ -5,18 +5,23 @@
   <title> Light Control </title>
   <link rel="stylesheet" type="text/css"
   href="css/style.css">
+
 </head> <!-- a comment -->
 
 <body>
   <div class="container">
     <h1> Here you can control the lights </h1>
-    <h2> The current time: </h2>
-    <?php
-      echo date("j.n.Y H:i", time());
-     ?>
+
     <div class="box1">
-      <p> turn the light <strong>on and off</strong> </p>
+      <h2> The current time: </h2>
+      <div class="h2" id="time_js"></div>
     </div>
+
+    </br>
+
+    <div class="box1">
+      <p> turn the light <strong>on and off</strong>: </p>
+
     <?php
       if(isset($_POST['newstate'])){
         $new = $_POST['newstate'];
@@ -30,7 +35,7 @@
           }
       }
       $light_status = exec("python3 python_scripts/get_light_status.py");
-      echo $light_status;
+      #echo $light_status;
       if($light_status == 'False'){
         echo "<p>The light is OFF.";
         echo "<p><form action='index.php' method='POST'>
@@ -47,9 +52,17 @@
       }
 
     ?>
+    </div>
+
+  </br>
+
+    <div class="box1">
+    <p> set the time to wake up: </p>
+
+
     <?php
-    session_start();
-    $alarm_set = False;
+    #session_start();
+    $alarm_set = exec("env/bin/python3 python_scripts/get_alarm_status.py");
     if(isset($_POST['alarm_state'])){
       $new_alarm_state = $_POST['alarm_state'];
       if($new_alarm_state == '0'){
@@ -58,7 +71,7 @@
         exec("python3 python_scripts/unset_alarm2.py");
         #echo $success;
 
-        $alarm_set = False;
+        #$alarm_set = False;
       }
       elseif($new_alarm_state == '1'){
         $start_time = $_POST['start_time'];
@@ -71,7 +84,7 @@
         #exec("python3 python_scripts/scratch.py");
         #$_SESSION["pid_alarm"] = $pid_alarm;
         #echo $pid_alarm;
-        $alarm_set = True;
+        #$alarm_set = True;
       }
     }
 
@@ -101,8 +114,8 @@
 
 
     ?>
+    </div>
     <p> try the <em>voice module</em> </p>
-    <p> set the time to wake up </p>
 
     <form action="index.php" method="POST">
       <div class="my-form">
@@ -117,10 +130,28 @@
     </form>
   </br>
   <div class="p-box">
+    <img id="BulbImage" src="images/light-off.jpg" />
   </div>
+
+
   <div>
     <a href="process.php" > Click here to change the COLOR </a>
   <script src="main.js"> </script>
+  <script src="time.js"> </script>
+  <!--<script src="change_image.js" data-variable= "<?php echo $light_status ; ?>"> </script>-->
+  <script>
+  light_status_js = "<?php echo $light_status ; ?>";
+  var test = "test";
+  console.log(light_status_js);
+
+  var image = document.getElementById('BulbImage');
+  if (light_status_js == "True"){
+    image.src = "images/light-on_small.jpg";
+  }
+  else{
+    image.src = "images/light--off.jpg";
+  }
+</script>
 
   </div>
 
