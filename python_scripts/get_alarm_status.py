@@ -7,5 +7,5 @@ with open("python_scripts/bulb_data.txt", 'r+') as data:
     if text == "No Alarm Set":
         print(False)
     else:
-        print(True)
+        print(str(text))
     data.close()

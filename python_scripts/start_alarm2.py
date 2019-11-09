@@ -19,7 +19,6 @@ with open("python_scripts/bulb_data.txt", 'w+') as data:
     data.write(alarm_time)
     #print("wrote data")
     data.close()
-    time.sleep(0.2)
 
 
 def check_if_break(alarm_time):
