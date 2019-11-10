@@ -5,6 +5,7 @@ import os
 import json
 import time
 
+
 class Bulb:
     """
     This class controls the mystrom bulb.

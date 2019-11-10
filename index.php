@@ -27,11 +27,11 @@
         $new = $_POST['newstate'];
         if($new=='0'){
           exec("python3 python_scripts/turn_light_off.py");
-          sleep(3);
+          sleep(1);
         }
         elseif ($new=='1') {
           exec("python3 python_scripts/turn_light_on.py");
-          sleep(3);
+          sleep(1);
           }
       }
       $light_status = exec("python3 python_scripts/get_light_status.py");
@@ -75,6 +75,7 @@
         #$pid_alarm = $_SESSION["pid_alarm"];
         #echo $pid_alarm;
         exec("python3 python_scripts/unset_alarm2.py");
+        sleep(1);
         #echo $success;
 
         #$alarm_set = False;
@@ -93,6 +94,7 @@
         echo $alarm_duration;
         echo "<p></br>";
         exec("env/bin/python3 python_scripts/set_alarm2.py $start_time $alarm_duration");
+        sleep(1);
         #exec("python3 python_scripts/scratch.py");
         #$_SESSION["pid_alarm"] = $pid_alarm;
         #echo $pid_alarm;
@@ -135,7 +137,63 @@
 
   </br>
 
+</div>
 
+</br>
+
+
+  <div class="box1">
+    <p> turn the switch <strong>on and off</strong>: </p>
+
+  <?php
+    if(isset($_POST['newstate_switch'])){
+      $new = $_POST['newstate_switch'];
+      if($new=='0'){
+        exec("python3 python_scripts/turn_switch_off.py");
+        sleep(1);
+      }
+      elseif ($new=='1') {
+        exec("python3 python_scripts/turn_switch_on.py");
+        sleep(1);
+        }
+    }
+    $switch_status = exec("python3 python_scripts/get_switch_status.py");
+    if($switch_status == 'False'){
+      echo "<p>The switch is OFF.";
+      echo "<p><form action='index.php' method='POST'>
+              <input type='hidden' name='newstate_switch' value='1'>
+              <input class=button type='submit' value='SWITCH ON'>
+              </form>";
+    }
+    else{
+      echo "<p>The switch is ON.";
+      echo "<p><form action='index.php' method='POST'>
+              <input type='hidden' name='newstate_switch' value='0'>
+              <input class=button type='submit' value='SWITCH OFF'>
+              </form>";
+    }
+
+  ?>
+  <?php
+    $temperature = exec("python3 python_scripts/get_room_temperature.py");
+    echo "<p>The room tempereature:";
+    echo "<p></br>";
+    echo "<p>$temperature °C";
+
+
+    //ob_start(); // begin collecting output
+    //include 'holder.php';
+    //$result = ob_get_clean();
+    //echo $result;
+
+
+   ?>
+
+
+  </br>
+  </div>
+
+  </br>
 
   <div>
     <a href="process.php" > Click here to change the COLOR </a>
@@ -153,6 +211,7 @@
   var alarm_status_js = "<?php echo $alarm_set ; ?>";
   </script>
   <script src="js/change_alarm_image.js"> </script>
+
 
 
 
