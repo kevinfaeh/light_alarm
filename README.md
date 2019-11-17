@@ -1,6 +1,6 @@
 # light_alarm
 
-This is a raspberry pi project. To goal is to have a website in your local network to turn lights/switches on and off and to set a light alarm with sound at a desired time. The alarm and light control is managed with the raspberry pi. What you need is a raspberry pi, audio device, mystrom wifi bulb and optionally a mystrom wifi switch that you want to control.
+This is a raspberry pi project. To goal is to have a website in your local network to turn lights/switches on and off, change the color of the bulb and to set a light alarm with sound at a desired time. The alarm and light control is managed with the raspberry pi. What you need is a raspberry pi, audio device, mystrom wifi bulb and optionally a mystrom wifi switch that you want to control.
 
 The mystrom wifi bulb and wifi switch are controlled with a web interface over an apache2 server running on the raspberry pi. The commands are python scripts which are exectued via php. In the python_scripts folder is the class WifiBulb.py and WifiSwitch.py which hold all functions.
 All website dependecies are in the css, images and js folde.
