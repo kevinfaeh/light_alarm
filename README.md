@@ -80,6 +80,8 @@ then give the bulb_data.txt file full access with:
 sudo chmod 777 /home/pi/html/light-alarm/pyhton_scripts/bulb_data.txt
 ```
 
-Now the only thing left is to insert your WifiBulb and WifiSwitch IP and MAC address in the WifiBulb.py and WifiSwitch.py class. Look at the bottem where a bulb or switch object is instantiated and edit there the IP and MAC address of your device. The MAC address is written on the product box and the IP address can be found with your router. For the switch it is possible that you need to enable access rights read the security section in https://api.mystrom.ch/?version=latest. Paste the IP-address of your switch in the browser, and got to "Experte" in the drop-down. There activate REST API and Panel Station Modus without setting any Token.
+Now the only thing left is to insert your WifiBulb and WifiSwitch IP and MAC address in the WifiBulb.py and WifiSwitch.py class. Look at the bottem where a bulb or switch object is instantiated and edit there the IP and MAC address of your device. The MAC address is written on the product box and the IP address can be found with your router. For the switch it is possible that you need to enable access rights read the security section in https://api.mystrom.ch/?version=latest. Paste the IP-address of your switch in the browser, and go to "Experte" in the drop-down. There activate REST API and Panel Station Modus without setting any Token.
 
 If anything fails, checkout the error logs in /var/log/apache2/error.log . Or try to run the python scripts without web interface in the shell.
+
+If everything works, you can now turn the light/switch on and off, change the color and set an alarm with alarm duration by inserting the IP address of your Raspberry Pi in the Browser of any device in your local network.
