@@ -87,3 +87,5 @@ If anything fails, checkout the error logs in /var/log/apache2/error.log . Or tr
 If everything works, you can now turn the light/switch on and off, change the color and set an alarm with alarm duration by inserting the IP address of your Raspberry Pi in the Browser of any device in your local network.
 
 If it doesn't work, you'll have to eat supper in the dark. :-)
+
+Have fun!
