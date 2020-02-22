@@ -148,7 +148,7 @@ bulb_ip = "192.168.8.115"
 bulb_mac = "68C63AD021B2"
 #
 bulb = Bulb(bulb_ip, bulb_mac)
-
+# this shows how to use it
 
 # bulb.set_light_mode("hsv")
 # # bulb.get_device_specifications(print_out=True)
